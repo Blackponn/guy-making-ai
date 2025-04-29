@@ -80,7 +80,7 @@ export default function Home() {
             </div>
             <div className="absolute bottom-0 w-[312px] h-[144px] pt-[8pt] text-center border-2 border-black rounded-[20pt] bg-white z-10">
               <div className="font-bold text-[24pt]">Kyle, 22</div>
-              <div className="text-gray-600">Hi! I'm Kyle. Nice to meet you.</div>
+              <div className="text-gray-600">{"Hi! I'm Kyle. Nice to meet you."}</div>
             </div>
           </SwiperSlide>
 
@@ -96,8 +96,8 @@ export default function Home() {
               />
             </div>
             <div className="absolute bottom-0 w-[312px] h-[144px] pt-[8pt] text-center border-2 border-black rounded-[20pt] bg-white z-10">
-              <div className="font-bold text-[24pt]">Alex, 25</div>
-              <div className="text-gray-600">Hey! I'm Alex. Nice to meet you.</div>
+              <div className="font-bold text-[24pt]">Thuch, 25</div>
+              <div className="text-gray-600">{"Hey! I'm Thuch. Nice to meet you."}</div>
             </div>
           </SwiperSlide>
 
@@ -113,8 +113,8 @@ export default function Home() {
               />
             </div>
             <div className="absolute bottom-0 w-[312px] h-[144px] pt-[8pt] text-center border-2 border-black rounded-[20pt] bg-white z-10">
-              <div className="font-bold text-[24pt]">John, 28</div>
-              <div className="text-gray-600">Hi, I'm John. Pleased to meet you!</div>
+              <div className="font-bold text-[24pt]">Ponn, 28</div>
+              <div className="text-gray-600">{"Hi, I'm Ponn. Pleased to meet you!"}</div>
             </div>
           </SwiperSlide>
         </Swiper>
