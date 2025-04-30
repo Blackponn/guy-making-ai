@@ -1,34 +1,49 @@
 "use client";
 
 import { useState, useRef } from "react";
+// ทำให้ใช้เรื่องเปลี่ยนสเตจและใช้การเลื่อนได้
 import { useRouter } from "next/navigation";
+// จัดเรื่อวการนำทางในหน้า
 import { Swiper, SwiperSlide } from "swiper/react";
+// เอาเข้าการปัด
 import { Navigation, Pagination } from "swiper/modules";
+// เอาเข้ามาเผื่อ แต่โค้ดนี้ไม่ได้ใช้
 import "swiper/css";
+// เอาสไตล์มาใช้
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import Image from "next/image";
 
 export default function Home() {
   const router = useRouter();
+  // สร้างเรื่องการนำทางไปหน้าอื่น
   const [swipeLeftCount, setSwipeLeftCount] = useState(0);
+  // สร้างว่าให้นับค่าตอนปัดซ้าย โดยเริ่มที่ 0
   const swiperRef = useRef(null);
+  // สร้างเรฟเพื่อใช้ในภายหลัง
 
   const handleSlideChange = (swiper) => {
     console.log("Current index:", swiper.activeIndex);
+    // ให้ระบุค่าในปัจจุบัน
 
     if (swiper.swipeDirection === "next") {
+      // ตรวจสอบว่าปัดซ้ายมั้ย
       setSwipeLeftCount((prev) => {
         const newCount = prev + 1;
+        // ปัดซ้ายคือการนับ เอาการนับครั้งก่อนหน้ามา + 1
         console.log("ปัดซ้ายครั้งที่", newCount);
         if (newCount >= 3) {
           router.push("/processing");
+          // ถ้าปัดซ้ายครบ 3 ครั้งคือการบังคับกลับไปยังหน้า processing
         }
         return newCount;
+        //และรีเซ็ตค่าที่นับไว้ใหม่
       });
     } else if (swiper.swipeDirection === "prev") {
+      // ตรวจสอบว่าปัดขวามั้ย
       console.log("ปัดขวา ไปหน้าถัดไป");
       router.push("/match");
+      // ปัดขวาไปยังหน้าแมทช์
     }
   };
 
@@ -38,11 +53,14 @@ export default function Home() {
 
     const currentIndex = swiper.activeIndex;
     console.log("กดปุ่ม ตอนอยู่สไลด์ที่:", currentIndex);
+    // เป็นตัวกลางในการทำให้กดปุ่มแล้วเหมือนการปัดซ้ายขวา
 
     if (direction === "left") {
       swiper.slideNext();
+      // กด x คือปัดซ้าย
     } else if (direction === "right") {
       router.push("/match");
+      // กดหัวใจคือปัดขวา
     }
   };
 
@@ -58,16 +76,18 @@ export default function Home() {
       <div className="relative flex flex-col items-center mt-4">
         <Swiper
           modules={[Navigation, Pagination]}
+          // ไม่มีในเว็บ
           spaceBetween={20}
           slidesPerView={1}
           slidesPerGroup={1}
-          speed={400}
-          threshold={10}
+          speed={1000}
+          threshold={25}
           onSlideChange={handleSlideChange}
           className="w-[312px] h-[500px]"
           ref={swiperRef}
+          // ทำให้สามารถเลื่อนได้
         >
-          {/* Slide 1 */}
+          
           <SwiperSlide className="flex flex-col items-center">
             <div className="relative mt-[24pt] w-[312px] h-[424px] rounded-[24pt] border-2 border-black overflow-hidden shadow-lg">
               <Image
@@ -84,7 +104,7 @@ export default function Home() {
             </div>
           </SwiperSlide>
 
-          {/* Slide 2 */}
+          
           <SwiperSlide className="flex flex-col items-center">
             <div className="relative mt-[24pt] w-[312px] h-[424px] rounded-[24pt] border-2 border-black overflow-hidden shadow-lg">
               <Image
@@ -101,7 +121,7 @@ export default function Home() {
             </div>
           </SwiperSlide>
 
-          {/* Slide 3 */}
+          
           <SwiperSlide className="flex flex-col items-center">
             <div className="relative mt-[24pt] w-[312px] h-[424px] rounded-[24pt] border-2 border-black overflow-hidden shadow-lg">
               <Image
@@ -119,9 +139,10 @@ export default function Home() {
           </SwiperSlide>
         </Swiper>
 
-        {/* Buttons */}
+        
         <div className="absolute bottom-[-40px] flex gap-[32px] justify-center items-center z-20">
           <button onClick={() => handleClickButton("left")}>
+            {/* เมื่อกดปุ่มนี้จะเป็นการกดปัดซ้าย */}
             <div className="relative w-[84px] h-[84px] rounded-full shadow-lg bg-white overflow-hidden">
               <Image
                 src="/images/x.png"
@@ -134,6 +155,7 @@ export default function Home() {
           </button>
 
           <button onClick={() => handleClickButton("right")}>
+            {/* กดแล้วจะเป็นการปัดขวา */}
             <div className="relative w-[84px] h-[84px] rounded-full shadow-lg bg-white overflow-hidden">
               <Image
                 src="/images/heart.png"
