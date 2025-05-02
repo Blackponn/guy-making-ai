@@ -1,26 +1,19 @@
 "use client";
 
 import { useState, useRef } from "react";
-// ทำให้ใช้เรื่องเปลี่ยนสเตจและใช้การเลื่อนได้
 import { useRouter } from "next/navigation";
-// จัดเรื่อวการนำทางในหน้า
 import { Swiper, SwiperSlide } from "swiper/react";
-// เอาเข้าการปัด
 import { Navigation, Pagination } from "swiper/modules";
 // เอาเข้ามาเผื่อ แต่โค้ดนี้ไม่ได้ใช้
 import "swiper/css";
-// เอาสไตล์มาใช้
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import Image from "next/image";
 
 export default function Home() {
   const router = useRouter();
-  // สร้างเรื่องการนำทางไปหน้าอื่น
   const [swipeLeftCount, setSwipeLeftCount] = useState(0);
-  // สร้างว่าให้นับค่าตอนปัดซ้าย โดยเริ่มที่ 0
   const swiperRef = useRef(null);
-  // สร้างเรฟเพื่อใช้ในภายหลัง
 
   const handleSlideChange = (swiper) => {
     console.log("Current index:", swiper.activeIndex);
@@ -30,20 +23,15 @@ export default function Home() {
       // ตรวจสอบว่าปัดซ้ายมั้ย
       setSwipeLeftCount((prev) => {
         const newCount = prev + 1;
-        // ปัดซ้ายคือการนับ เอาการนับครั้งก่อนหน้ามา + 1
         console.log("ปัดซ้ายครั้งที่", newCount);
         if (newCount >= 3) {
           router.push("/processing");
-          // ถ้าปัดซ้ายครบ 3 ครั้งคือการบังคับกลับไปยังหน้า processing
         }
         return newCount;
-        //และรีเซ็ตค่าที่นับไว้ใหม่
       });
     } else if (swiper.swipeDirection === "prev") {
-      // ตรวจสอบว่าปัดขวามั้ย
       console.log("ปัดขวา ไปหน้าถัดไป");
       router.push("/match");
-      // ปัดขวาไปยังหน้าแมทช์
     }
   };
 
@@ -57,10 +45,8 @@ export default function Home() {
 
     if (direction === "left") {
       swiper.slideNext();
-      // กด x คือปัดซ้าย
     } else if (direction === "right") {
       router.push("/match");
-      // กดหัวใจคือปัดขวา
     }
   };
 
@@ -85,7 +71,6 @@ export default function Home() {
           onSlideChange={handleSlideChange}
           className="w-[312px] h-[500px]"
           ref={swiperRef}
-          // ทำให้สามารถเลื่อนได้
         >
           
           <SwiperSlide className="flex flex-col items-center">
